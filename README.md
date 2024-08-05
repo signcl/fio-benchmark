@@ -5,7 +5,7 @@
 
 ## 临时存储空间性能测试
 
-## 利用 shell 脚本，针对不同场景分别生成不同的fio脚本命令来对磁盘进行benchmark
+### 利用 shell 脚本，针对不同场景分别生成不同的fio脚本命令来对磁盘进行benchmark
 
 1. 创建一个测试目录`json_results`，用来存放生成的json数据
 2. 注意测试的时候需要根据具体情况来修改脚本内容,默认值:
@@ -64,11 +64,11 @@ done
 
 ### 使用说明
 
-	1.	NUMJOBS：默认为1，可以通过命令行参数进行覆盖。例如，若要使用4，可以运行脚本时传递参数 ./run_fio_tests.sh 4。
-	2.	MODE：读写模式，默认为 randread，可以通过命令行参数进行覆盖。例如，若要使用 randwrite，可以运行脚本时传递参数 ./run_fio_tests.sh 1 randwrite。
-	3.	BLOCK_SIZE：块大小，默认为 4k，可以通过命令行参数进行覆盖。例如，若要使用 4M，可以运行脚本时传递参数 ./run_fio_tests.sh 1 randread 4M。
-	4.	FILESIZE：文件大小，指定为 2G，与您的文件大小一致。
-	5.	OUTPUT_DIR：存放 JSON 文件的目录，默认为 json_results。
+1.	NUMJOBS：默认为1，可以通过命令行参数进行覆盖。例如，若要使用4，可以运行脚本时传递参数 ./run_fio_tests.sh 4。
+2.	MODE：读写模式，默认为 randread，可以通过命令行参数进行覆盖。例如，若要使用 randwrite，可以运行脚本时传递参数 ./run_fio_tests.sh 1 randwrite。
+3.	BLOCK_SIZE：块大小，默认为 4k，可以通过命令行参数进行覆盖。例如，若要使用 4M，可以运行脚本时传递参数 ./run_fio_tests.sh 1 randread 4M。
+4.	FILESIZE：文件大小，指定为 2G，与您的文件大小一致。
+5.	OUTPUT_DIR：存放 JSON 文件的目录，默认为 json_results。
 
 
 ### 运行脚本
