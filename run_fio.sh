@@ -8,9 +8,6 @@ current_dir=$(pwd)
 
 # 循环遍历每个目录
 for dir in "${directories[@]}"; do
-  # 创建json_results目录
-  mkdir -p "$current_dir/$dir/json_results"
-
   # 创建脚本
   cat << 'EOL' > "$current_dir/$dir/run_fio_tests.sh"
 #!/bin/bash
@@ -50,6 +47,9 @@ EOF
 
   # 定义输出文件名称
   output_file="${OUTPUT_DIR}/${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.json"
+
+  # 运行fio测试
+  fio --output-format=json --output="${output_file}" $config_file
 
   # 输出完成信息
   echo "Prepared to run fio with numjobs=${NUMJOBS}, rw=${MODE}, bs=${BLOCK_SIZE}, and iodepth=${IODEPTH}"
