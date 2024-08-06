@@ -183,6 +183,24 @@ done
 |  5 | 4-proc-randread-4k-16 |        16 |       4 |    86845.4  |            0 |          339.239  |                  0 |
 
 
+## 测试图表
+
+![企业微信截图_293ff91a-7c25-446d-9f92-649dd852f3e7](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_293ff91a-7c25-446d-9f92-649dd852f3e7.png)
+
+![企业微信截图_d4d0959a-f46d-48fa-8991-b6eff2006702](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_d4d0959a-f46d-48fa-8991-b6eff2006702.png)
+
+![企业微信截图_f6efefc5-27c1-4056-ae00-26f53d38db93](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_f6efefc5-27c1-4056-ae00-26f53d38db93.png)
+
+
+![企业微信截图_579e71b6-0607-47fe-9469-0769aa0d889b](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_579e71b6-0607-47fe-9469-0769aa0d889b.png)
+
+![企业微信截图_e9ebf4d4-0fcf-4ae8-be71-82bc3beb7d17](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_e9ebf4d4-0fcf-4ae8-be71-82bc3beb7d17.png)
+
+![企业微信截图_ef435e2c-5a35-4d71-ab4b-3da4a708f9c0](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_ef435e2c-5a35-4d71-ab4b-3da4a708f9c0.png)
+
+![企业微信截图_63770cba-08a5-43dc-986b-972016c00e1a](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_63770cba-08a5-43dc-986b-972016c00e1a.png)
+
+![企业微信截图_36ed7368-aa6c-4676-a3ec-130c5ed4ddcd](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_36ed7368-aa6c-4676-a3ec-130c5ed4ddcd.png)
 
 ## 文章参考
 
