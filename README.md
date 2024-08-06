@@ -202,6 +202,17 @@ done
 
 ![企业微信截图_36ed7368-aa6c-4676-a3ec-130c5ed4ddcd](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_36ed7368-aa6c-4676-a3ec-130c5ed4ddcd.png)
 
+
+- 14G 文件测试
+![企业微信截图_9f19be07-b6d2-4db5-a583-9b910c86814b](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_9f19be07-b6d2-4db5-a583-9b910c86814b.png)
+
+![企业微信截图_90da2ff4-c50a-43f4-ad99-3057e0762630](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_90da2ff4-c50a-43f4-ad99-3057e0762630.png)
+
+![企业微信截图_560ac024-211a-4318-a6d2-c787d0b10d49](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/企业微信截图_560ac024-211a-4318-a6d2-c787d0b10d49.png)
+
+![20240806163640](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240806163640.png)
+
+
 ## 文章参考
 
 - [openbayes 磁盘测试](https://openbayes.com/docs/runtimes/storage-perf/)

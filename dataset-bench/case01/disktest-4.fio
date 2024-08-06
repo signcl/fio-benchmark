@@ -1,0 +1,14 @@
+[disktest]
+ioengine=libaio
+iodepth=4
+numjobs=1
+rw=randread
+bs=4M
+direct=1
+buffered=0
+filename=/cephfs-benchmark/openbayes-data/cephfs-benchmark/dataset-bench/train.zip
+size=14G
+runtime=30
+
+time_based
+group_reporting

@@ -84,16 +84,12 @@ def main(json_dir, output_dir, mode, size):
 
 # 设置 JSON 文件所在目录和输出图表的目录
 json_dirs = {
-    'randread-4k': './randread/json_results/randread-4k',
-    'randread-4096k': './randread/json_results/randread-4096k',
-    'randwrite-4k': './randwrite/json_results/randwrite-4k',
-    'randwrite-4096k': './randwrite/json_results/randwrite-4096k',
-    'read-4k': './read/json_results/read-4k',
-    'read-4096k': './read/json_results/read-4096k',
-    'write-4k': './write/json_results/write-4k',
-    'write-4096k': './write/json_results/write-4096k'
+    'randread-4k': './cephfs-benchmark/dataset-bench/json_results/randread-4k',
+    'randread-4M': './cephfs-benchmark/dataset-bench/json_results/randread-4M',
+    'read-4096kk': './cephfs-benchmark/dataset-bench/json_results/read-4096k',
+    'read-4k': './cephfs-benchmark/dataset-bench/json_results/read-4k',
 }
-output_dir = './output_charts'  # 替换为您希望保存图表的目录
+output_dir = './output_charts_14G'  # 替换为您希望保存图表的目录
 
 # 运行主函数并显示结果
 for key, json_dir in json_dirs.items():
