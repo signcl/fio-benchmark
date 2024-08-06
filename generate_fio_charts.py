@@ -11,17 +11,17 @@ def parse_fio_json(file_path, mode):
     job_name = os.path.basename(file_path).replace('.json', '')
     parts = job_name.split('-')
     if mode in ['randread', 'read']:
-        iops = data['jobs'][0]['read']['iops']
-        bw = data['jobs'][0]['read']['bw'] / 1024  # 转换为 GiB/s
+        iops = data['jobs'][0]['read']['iops']  # IOPS 默认单位是 ops/s，不需要转换
+        bw = data['jobs'][0]['read']['bw'] / 1048576  # 将 KB/s 转换为 GiB/s
     else:  # randwrite, write
-        iops = data['jobs'][0]['write']['iops']
-        bw = data['jobs'][0]['write']['bw'] / 1024  # 转换为 GiB/s
+        iops = data['jobs'][0]['write']['iops']  # IOPS 默认单位是 ops/s，不需要转换
+        bw = data['jobs'][0]['write']['bw'] / 1048576  # 将 KB/s 转换为 GiB/s
     procs = int(parts[0])
     iodepth = int(parts[-1])
     return job_name, iodepth, procs, iops, bw
 
 # 定义生成图表的函数
-def generate_charts(data, output_dir, output_filename, mode):
+def generate_charts(data, output_dir, output_filename, mode, size):
     df = pd.DataFrame(data, columns=['Job', 'iodepth', 'procs', 'IOPS', 'BW (GiB/s)'])
     df = df.sort_values(by=['procs', 'iodepth'])
 
@@ -38,7 +38,11 @@ def generate_charts(data, output_dir, output_filename, mode):
         fig.add_trace(go.Scatter(x=subset['iodepth'], y=subset['BW (GiB/s)'], mode='lines+markers', name=f'BW: procs={proc}', yaxis='y2'))
 
     fig.update_layout(
-        title=f"IOPS and Bandwidth vs iodepth ({mode})",
+        title={
+            'text': f"IOPS and Bandwidth vs iodepth ({mode} {size})",
+            'x': 0.5,
+            'xanchor': 'center'
+        },
         xaxis=dict(
             title="iodepth",
             type="category",
@@ -64,7 +68,7 @@ def generate_charts(data, output_dir, output_filename, mode):
     return df, html_filename
 
 # 主函数
-def main(json_dir, output_dir, mode):
+def main(json_dir, output_dir, mode, size):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     data = []
@@ -74,8 +78,8 @@ def main(json_dir, output_dir, mode):
                 file_path = os.path.join(root, json_file)
                 job_name, iodepth, procs, iops, bw = parse_fio_json(file_path, mode)
                 data.append([job_name, iodepth, procs, iops, bw])
-    output_filename = f'iops_bw_{mode}_chart_plotly'
-    df, html_filepath = generate_charts(data, output_dir, output_filename, mode)
+    output_filename = f'iops_bw_{mode}_{size}_chart_plotly'
+    df, html_filepath = generate_charts(data, output_dir, output_filename, mode, size)
     return df, html_filepath
 
 # 设置 JSON 文件所在目录和输出图表的目录
@@ -94,7 +98,8 @@ output_dir = './output_charts'  # 替换为您希望保存图表的目录
 # 运行主函数并显示结果
 for key, json_dir in json_dirs.items():
     mode = key.split('-')[0]  # 获取模式
-    df, html_filepath = main(json_dir, output_dir, mode)
+    size = key.split('-')[1]  # 获取块大小
+    df, html_filepath = main(json_dir, output_dir, mode, size)
     markdown_output = df.to_markdown()
     print(markdown_output)
 
