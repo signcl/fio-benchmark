@@ -213,6 +213,25 @@ done
 ![20240806163640](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240806163640.png)
 
 
+## 小算图表
+
+![20240807155858](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807155858.png)
+
+![20240807155958](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807155958.png)
+
+![20240807160243](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807160243.png)
+
+![20240807160359](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807160359.png)
+
+![20240807160809](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807160809.png)
+
+![20240807160959](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807160959.png)
+
+![20240807161117](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807161117.png)
+
+![20240807161156](https://barry-boy-1311671045.cos.ap-beijing.myqcloud.com/blog/20240807161156.png)
+
+
 ## 文章参考
 
 - [openbayes 磁盘测试](https://openbayes.com/docs/runtimes/storage-perf/)
