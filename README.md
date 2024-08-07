@@ -13,7 +13,10 @@
   - MODE 为fio测试模式，默认值为randread
   - BLOCK_SIZE 为测试数据块的大小，默认值为4k
 
-bash run_fio.sh 这个脚本，会在每个测试模式下生成对于fio测试命令。
+
+- bash run_fio_2G.sh 这个脚本，会在每个测试模式下生成对于fio测试命令。
+- bash run_fio_14G.sh 这个脚本，会在每个测试模式下生成对于fio测试命令。
+
 具体的脚本，创建一个名为run_fio_tests.sh的文件，并chmod 赋予+x权限。执行该脚本就会在`json_results`目录下生成fio 测试的json文件
 
 ```
