@@ -38,7 +38,7 @@ for IODEPTH in "\${iodepths[@]}"; do
   config_file="\${NUMJOBS}-proc-\${MODE}-\${BLOCK_SIZE}-\${IODEPTH}.fio"
 
   # 创建配置文件
-  cat << EOF2 > \$config_file
+  cat << EOF > \$config_file
 [disktest]
 ioengine=libaio
 iodepth=\${IODEPTH}
@@ -51,7 +51,7 @@ size=\${FILESIZE}
 runtime=30
 time_based
 group_reporting
-EOF2
+EOF
 
   # 定义输出文件名称
   output_file="\${OUTPUT_DIR}/\${NUMJOBS}-proc-\${MODE}-\${BLOCK_SIZE}-\${IODEPTH}.json"
