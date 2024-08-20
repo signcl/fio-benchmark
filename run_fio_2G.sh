@@ -8,6 +8,12 @@ current_dir=$(pwd)
 
 # 循环遍历每个目录
 for dir in "${directories[@]}"; do
+  # 检查并创建目录
+  if [ ! -d "$current_dir/$dir" ]; then
+    mkdir -p "$current_dir/$dir"
+    echo "Directory $dir created."
+  fi
+
   # 创建脚本
   cat << EOF > "$current_dir/$dir/run_fio_tests.sh"
 #!/bin/bash
