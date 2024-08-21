@@ -1,13 +1,40 @@
 #!/bin/bash
 
+# 定义需要处理的目录列表
+directories=("randread" "randwrite" "read" "write")
+
+# 定义 JSON 结果目录的基础名称
+json_results_dir_name="env_json_results"
+
+# 获取当前工作目录
+current_dir=$(pwd)
+
+# 循环遍历每个目录
+for dir in "${directories[@]}"; do
+  # 检查并创建目录
+  if [ ! -d "$current_dir/$dir" ]; then
+    mkdir -p "$current_dir/$dir"
+    echo "Directory $dir created."
+  fi
+
+  # 在当前目录下创建 JSON 结果目录
+  json_results_dir="$current_dir/$dir/$json_results_dir_name"
+  mkdir -p "$json_results_dir"
+  echo "JSON results directory $json_results_dir created."
+
+  # 创建脚本
+  cat << 'EOF' > "$current_dir/$dir/run_fio_tests.sh"
+#!/bin/bash
+
 # 定义环境变量
 NUMJOBS=${1:-1}  # 默认为1，可以通过命令行参数覆盖
 MODE=${2:-randread}  # 默认为randread，可以通过命令行参数覆盖
 BLOCK_SIZE=${3:-4k}  # 默认为4k，可以通过命令行参数覆盖
+OUTPUT_BASE_DIR=${4:-env_json_results}  # 默认为env_json_results，可以通过命令行参数覆盖
 FILESIZE=14G  # 文件大小
 
 # 根据模式和块大小定义输出目录
-OUTPUT_DIR="./json_results/${MODE}-${BLOCK_SIZE}"
+OUTPUT_DIR="./${OUTPUT_BASE_DIR}/${MODE}-${BLOCK_SIZE}"
 
 # 创建输出目录
 mkdir -p $OUTPUT_DIR
@@ -20,7 +47,7 @@ for IODEPTH in "${iodepths[@]}"; do
   config_file="${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.fio"
 
   # 创建配置文件
-  cat << EOF > $config_file
+  cat << EOF2 > $config_file
 [disktest]
 ioengine=libaio
 iodepth=${IODEPTH}
@@ -34,7 +61,7 @@ size=${FILESIZE}
 runtime=30
 time_based
 group_reporting
-EOF
+EOF2
 
   # 定义输出文件名称
   output_file="${OUTPUT_DIR}/${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.json"
@@ -43,4 +70,12 @@ EOF
   fio --output-format=json --output="${output_file}" $config_file
 
   echo "Finished running fio with numjobs=${NUMJOBS}, rw=${MODE}, bs=${BLOCK_SIZE}, and iodepth=${IODEPTH}"
+done
+EOF
+
+  # 设置脚本可执行权限
+  chmod +x "$current_dir/$dir/run_fio_tests.sh"
+  find . -type f \( -name 'train.zip' -o -name '*.fio' \) -exec rm -f {} \;
+  find . -name .DS_Store | xargs rm -rf
+
 done

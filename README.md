@@ -27,6 +27,7 @@
 ```
 cd randread/
 ./run_fio_tests.sh 1 randread 4096k
+./run_fio_tests.sh 4 randread 4096k
 ```
 
 - 脚本示例:
@@ -37,8 +38,11 @@ cd randread/
 NUMJOBS=${1:-1}  # 默认为1，可以通过命令行参数覆盖
 MODE=${2:-randread}  # 默认为randread，可以通过命令行参数覆盖
 BLOCK_SIZE=${3:-4k}  # 默认为4k，可以通过命令行参数覆盖
+OUTPUT_BASE_DIR=${4:-env_json_results}  # 默认为env_json_results，可以通过命令行参数覆盖
 FILESIZE=2G  # 文件大小
-OUTPUT_DIR="json_results"  # JSON 文件存放目录
+
+# 根据模式和块大小定义输出目录
+OUTPUT_DIR="./${OUTPUT_BASE_DIR}/${MODE}-${BLOCK_SIZE}"
 
 # 创建输出目录
 mkdir -p $OUTPUT_DIR
@@ -48,10 +52,10 @@ iodepths=("1" "2" "4" "8" "16")
 
 for IODEPTH in "${iodepths[@]}"; do
   # 创建配置文件名称
-  config_file="${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}.fio"
+  config_file="${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.fio"
 
   # 创建配置文件
-  cat << EOF > $config_file
+  cat << EOF2 > $config_file
 [disktest]
 ioengine=libaio
 iodepth=${IODEPTH}
@@ -64,16 +68,18 @@ size=${FILESIZE}
 runtime=30
 time_based
 group_reporting
-EOF
+EOF2
 
   # 定义输出文件名称
   output_file="${OUTPUT_DIR}/${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.json"
 
   # 运行fio测试
-  fio --output-format=json --output="${output_file}" $config_file
+  fio --output-format=json --output="$output_file" $config_file
 
-  echo "Finished running fio with numjobs=${NUMJOBS}, rw=${MODE}, bs=${BLOCK_SIZE}, and iodepth=${IODEPTH}"
+  # 输出完成信息
+  echo "Prepared to run fio with numjobs=${NUMJOBS}, rw=${MODE}, bs=${BLOCK_SIZE}, and iodepth=${IODEPTH}"
 done
+
 ```
 
 
@@ -89,9 +95,6 @@ done
 ### 运行脚本
 
 ```
-./run_fio_tests.sh 1 randread 4096k
-./run_fio_tests.sh 4 randwrite 4M
-
 
 ./run_fio_tests.sh 1 randread 4096k && ./run_fio_tests.sh 4 randread 4096k && ./run_fio_tests.sh 1 randread 4k && ./run_fio_tests.sh 4 randread 4k
 
@@ -102,11 +105,13 @@ done
 ./run_fio_tests.sh 1 write 4096k && ./run_fio_tests.sh 4 write 4096k && ./run_fio_tests.sh 1 write 4k && ./run_fio_tests.sh 4 write 4k
 ```
 
+
+
 ### 文件名和配置文件
 
-•	根据 numjobs、rw 和 bs 参数生成相应的配置文件，例如 1-proc-randread-4k.fio。
-•	输出文件名包含 numjobs、rw、bs 和 iodepth，例如 1-proc-randread-4k-1.json。
-•	JSON 文件存放在 json_results 目录中。
+- 根据 numjobs、rw 和 bs 参数生成相应的配置文件，例如 1-proc-randread-4k.fio。
+- 输出文件名包含 numjobs、rw、bs 和 iodepth，例如 1-proc-randread-4k-1.json。
+- JSON 文件存放在 json_results 目录中。
 
 这个脚本将自动生成和运行包含不同 iodepth 值的 fio 测试，并将结果保存到指定目录中的相应 JSON 文件中。每个测试完成后，脚本会输出一条完成信息，以便跟踪进度
 
@@ -117,6 +122,24 @@ done
 1. 以下是针对数据集目录来测试，主要针对共享文件存储Cephfs。
 2. 用法同上
 
+- 测试:
+
+```
+cd randread/
+./run_fio_tests.sh 1 randread 4M
+./run_fio_tests.sh 4 randread 4M
+```
+
+
+### 运行脚本
+
+```
+./run_fio_tests.sh 1 randread 4M && ./run_fio_tests.sh 4 randread 4M && ./run_fio_tests.sh 1 randread 4k && ./run_fio_tests.sh 4 randread 4k
+
+./run_fio_tests.sh 1 read 4096k && ./run_fio_tests.sh 4 read 4096k && ./run_fio_tests.sh 1 read 4k && ./run_fio_tests.sh 4 read 4k
+
+```
+
 ```
 #!/bin/bash
 
@@ -124,8 +147,11 @@ done
 NUMJOBS=${1:-1}  # 默认为1，可以通过命令行参数覆盖
 MODE=${2:-randread}  # 默认为randread，可以通过命令行参数覆盖
 BLOCK_SIZE=${3:-4k}  # 默认为4k，可以通过命令行参数覆盖
+OUTPUT_BASE_DIR=${4:-env_data_json_results}  # 默认为env_data_json_results，可以通过命令行参数覆盖
 FILESIZE=14G  # 文件大小
-OUTPUT_DIR="json_results"  # JSON 文件存放目录
+
+# 根据模式和块大小定义输出目录
+OUTPUT_DIR="./${OUTPUT_BASE_DIR}/${MODE}-${BLOCK_SIZE}"
 
 # 创建输出目录
 mkdir -p $OUTPUT_DIR
@@ -135,10 +161,10 @@ iodepths=("1" "2" "4" "8" "16")
 
 for IODEPTH in "${iodepths[@]}"; do
   # 创建配置文件名称
-  config_file="${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}.fio"
+  config_file="${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.fio"
 
   # 创建配置文件
-  cat << EOF > $config_file
+  cat << EOF2 > $config_file
 [disktest]
 ioengine=libaio
 iodepth=${IODEPTH}
@@ -152,7 +178,7 @@ size=${FILESIZE}
 runtime=30
 time_based
 group_reporting
-EOF
+EOF2
 
   # 定义输出文件名称
   output_file="${OUTPUT_DIR}/${NUMJOBS}-proc-${MODE}-${BLOCK_SIZE}-${IODEPTH}.json"
