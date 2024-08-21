@@ -4,7 +4,7 @@
 directories=("randread" "randwrite" "read" "write")
 
 # 定义 JSON 结果目录的基础名称
-json_results_dir_name="bj_json_results"
+json_results_dir_name="env_json_results"
 
 # 获取当前工作目录
 current_dir=$(pwd)
@@ -30,7 +30,7 @@ for dir in "${directories[@]}"; do
 NUMJOBS=${1:-1}  # 默认为1，可以通过命令行参数覆盖
 MODE=${2:-randread}  # 默认为randread，可以通过命令行参数覆盖
 BLOCK_SIZE=${3:-4k}  # 默认为4k，可以通过命令行参数覆盖
-OUTPUT_BASE_DIR=${4:-bj_json_results}  # 默认为bj_json_results，可以通过命令行参数覆盖
+OUTPUT_BASE_DIR=${4:-env_json_results}  # 默认为env_json_results，可以通过命令行参数覆盖
 FILESIZE=2G  # 文件大小
 
 # 根据模式和块大小定义输出目录
@@ -75,5 +75,7 @@ EOF
 
   # 设置脚本可执行权限
   chmod +x "$current_dir/$dir/run_fio_tests.sh"
+  find . -type f \( -name 'disktest*' -o -name '*.fio' \) -exec rm -f {} \;
+  find . -name .DS_Store | xargs rm -rf
 
 done
