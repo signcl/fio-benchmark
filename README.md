@@ -7,18 +7,29 @@
 
 ### 利用 shell 脚本，针对不同场景分别生成不同的fio脚本命令来对磁盘进行benchmark
 
-1. 创建一个测试目录`json_results`，用来存放生成的json数据
+1. 项目的目录下，分别对应randread,randwrite,read,write 四个工作目录。修改脚本run_fio_2G.sh 中 `json_results_dir_name` 为: 默认为`env_json_results`。也就是如果不手动指定json数据存放目录，所有的
+   数据都将存在env_json_results目录中。建议每次修改这个json的值。来存放不同环境的测试结果。
+
 2. 注意测试的时候需要根据具体情况来修改脚本内容,默认值:
   - 1为任务数量
   - MODE 为fio测试模式，默认值为randread
   - BLOCK_SIZE 为测试数据块的大小，默认值为4k
 
+3. 我们要测试什么模式的性能，就在对应的模式下benchmark。
 
 - bash run_fio_2G.sh 这个脚本，会在每个测试模式下生成对于fio测试命令。
 - bash run_fio_14G.sh 这个脚本，会在每个测试模式下生成对于fio测试命令。
 
-具体的脚本，创建一个名为run_fio_tests.sh的文件，并chmod 赋予+x权限。执行该脚本就会在`json_results`目录下生成fio 测试的json文件
+具体的脚本，创建一个名为run_fio_tests.sh的文件，并chmod 赋予+x权限。执行该脚本就会在`env_json_results`目录下生成fio 测试的json文件
 
+- 测试:
+
+```
+cd randread/
+./run_fio_tests.sh 1 randread 4096k
+```
+
+- 脚本示例:
 ```
 #!/bin/bash
 
