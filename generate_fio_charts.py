@@ -101,16 +101,23 @@ def main(json_dir, output_dir, mode, size):
 # }
 
 json_dirs = {
-    'randread-4k': './randread/bj_2G_json_results/randread-4k',
-    'randread-4096k': './randread/b j_2G_json_results/randread-4096k',
-    'randwrite-4k': './randwrite/bj_2G_json_results/randwrite-4k',
-    'randwrite-4096k': './randwrite/bj_2G_json_results/randwrite-4096k',
-    'read-4k': './read/bj_2G_json_results/read-4k',
-    'read-4096k': './read/bj_2G_json_results/read-4096k',
-    'write-4k': './write/bj_2G_json_results/write-4k',
-    'write-4096k': './write/bj_2G_json_results/write-4096k'
+    'randread-4k': './randread/cmft_14G_json_results/randread-4k',
+    'randread-4M': './randread/cmft_14G_json_results/randread-4M',
+    'read-4096k': './read/cmft_14G_json_results/read-4096k',
+    'read-4k': './read/cmft_14G_json_results/read-4k',
 }
-output_dir = './charts/bj_2G_output_charts'  # 替换为您希望保存图表的目录
+
+# json_dirs = {
+#     'randread-4k': './randread/cmft_2G_json_results/randread-4k',
+#     'randread-4096k': './randread/cmft_2G_json_results/randread-4096k',
+#     'randwrite-4k': './randwrite/cmft_2G_json_results/randwrite-4k',
+#     'randwrite-4096k': './randwrite/cmft_2G_json_results/randwrite-4096k',
+#     'read-4k': './read/cmft_2G_json_results/read-4k',
+#     'read-4096k': './read/cmft_2G_json_results/read-4096k',
+#     'write-4k': './write/cmft_2G_json_results/write-4k',
+#     'write-4096k': './write/cmft_2G_json_results/write-4096k'
+# }
+output_dir = './charts/cmft_14G_output_charts'  # 替换为您希望保存图表的目录
 
 # 运行主函数并显示结果
 for key, json_dir in json_dirs.items():
