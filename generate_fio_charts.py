@@ -101,10 +101,10 @@ def main(json_dir, output_dir, mode, size):
 # }
 
 json_dirs = {
-    'randread-4k': './randread/cmft_14G_json_results/randread-4k',
-    'randread-4M': './randread/cmft_14G_json_results/randread-4M',
-    'read-4096k': './read/cmft_14G_json_results/read-4096k',
-    'read-4k': './read/cmft_14G_json_results/read-4k',
+    'randread-4k': './randread/xs_14G_json_results/randread-4k',
+    'randread-4M': './randread/xs_14G_json_results/randread-4M',
+    'read-4096k': './read/xs_14G_json_results/read-4096k',
+    'read-4k': './read/xs_14G_json_results/read-4k',
 }
 
 # json_dirs = {
@@ -117,7 +117,7 @@ json_dirs = {
 #     'write-4k': './write/cmft_2G_json_results/write-4k',
 #     'write-4096k': './write/cmft_2G_json_results/write-4096k'
 # }
-output_dir = './charts/cmft_14G_output_charts'  # 替换为您希望保存图表的目录
+output_dir = './charts/xs_14G_output_charts'  # 替换为您希望保存图表的目录
 
 # 运行主函数并显示结果
 for key, json_dir in json_dirs.items():
